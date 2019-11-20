@@ -68,7 +68,7 @@ namespace ConsoleApp
                     break;
 
                 case (int)menuItems.done:
-                    System.Console.WriteLine("DONE test test");
+                    System.Console.WriteLine("DONE");
                     break;
 
                 default:

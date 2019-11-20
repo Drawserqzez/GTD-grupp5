@@ -6,7 +6,9 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string[] things = new string[] { "TODO", "DOING", "DONE" };
+            Menu menu = new Menu();
+            menu.DisplayMenu(things, "Get Things Done!");
         }
     }
 }

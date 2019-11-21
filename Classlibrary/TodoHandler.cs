@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -40,8 +41,6 @@ namespace Classlibrary {
                 select t
             ).ToList();
 
-            
-
             List<Task> result = (firstType == ListType.Todo) 
                 ? todoResult.Union(doingResult).ToList() : doingResult.Union(todoResult).ToList();
             return result;
@@ -65,7 +64,7 @@ namespace Classlibrary {
         }
 
         public void MoveTask(int taskIndex, ListType source, ListType target) {
-            
+            throw new NotImplementedException();
         }
     }
 }

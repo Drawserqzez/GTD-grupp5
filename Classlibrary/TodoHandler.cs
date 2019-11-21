@@ -24,26 +24,12 @@ namespace Classlibrary {
             return todoResults.ToList();
         }
 
-        public Task GetTask(ListType source, int taskIndex) {
+        private Task GetTask(ListType source, int taskIndex) {
             return _taskList[(int)source][taskIndex];
         }
 
-        public List<Task> GetTasks(ListType firstType) {
-            var todoResult = (
-                from t in _taskList[(int)ListType.Todo]
-                orderby (int)t.TaskPriority descending
-                select t
-            ).ToList();
-            
-            var doingResult = (
-                from t in _taskList[(int)ListType.Doing]
-                orderby (int)t.TaskPriority descending
-                select t
-            ).ToList();
-
-            List<Task> result = (firstType == ListType.Todo) 
-                ? todoResult.Union(doingResult).ToList() : doingResult.Union(todoResult).ToList();
-            return result;
+        public List<Task> GetTasks() {
+            return _taskList[(int)ListType.Todo].Union(_taskList[(int)ListType.Doing]).Union(_taskList[(int)ListType.Done]).ToList();
         }
 
         public List<Task> GetTasks(bool sortByPriority) {        
@@ -63,8 +49,11 @@ namespace Classlibrary {
             }
         }
 
-        public void MoveTask(int taskIndex, ListType source, ListType target) {
-            throw new NotImplementedException();
+        public void MoveTask(int taskIndex, ListType source) {
+            int newListIndex = (source == ListType.Done) ? (int)source - 1 : (int)source + 1;
+            Task taskToMove = GetTask(source, taskIndex);
+            _taskList[(int)source].Remove(taskToMove);
+            _taskList[newListIndex].Add(taskToMove);
         }
     }
 }

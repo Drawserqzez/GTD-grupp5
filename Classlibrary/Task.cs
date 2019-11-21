@@ -21,6 +21,10 @@ namespace Classlibrary
 
         }
 
+        public Task(string title) {
+            _title = title;
+        }
+
         public Task(string title, int deadline, TaskType type, Priority prio) {
             _title = title;
             _dateAdded = DateTime.Now;

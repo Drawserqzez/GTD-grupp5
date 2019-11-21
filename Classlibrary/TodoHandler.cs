@@ -11,27 +11,39 @@ namespace Classlibrary {
             _taskList = new List<List<Task>>();      
         }
 
+        // AddItem adds a task to the todo-list. Can later be changed with MoveTask
         public void AddItem(Task itemToAdd) {
             _taskList[(int)ListType.Todo].Add(itemToAdd);
         }
 
+        // LINQ query that searches the titles of the tasks and returns a list with all results.
+        // If no results exists it returns a list and a task with an error-message
         public List<Task> SearchTasks(string searchTerm) {
             var todoResults = 
                 from t in 
                     _taskList[(int)ListType.Todo].Union(_taskList[(int)ListType.Doing]).Union(_taskList[(int)ListType.Done])                    
                 where t.Title.Contains(searchTerm)
                 select t;
-            return todoResults.ToList();
+            return (todoResults != null) ? todoResults.ToList() : new List<Task>{ new Task("No results found") };
         }
 
+        // Gets a task at a specific index from a specific list
+        // With problems it returns an error
         private Task GetTask(ListType source, int taskIndex) {
-            return _taskList[(int)source][taskIndex];
+            try {
+                return _taskList[(int)source][taskIndex];
+            }
+            catch {
+                return new Task("Error");
+            }
         }
 
+        // Returns all tasks 
         public List<Task> GetTasks() {
             return _taskList[(int)ListType.Todo].Union(_taskList[(int)ListType.Doing]).Union(_taskList[(int)ListType.Done]).ToList();
         }
 
+        // Returns tasks from the Todo- and Doing-lists and sorts them by priority or by tasktype
         public List<Task> GetTasks(bool sortByPriority) {        
             if (sortByPriority) {
                 return (
@@ -49,6 +61,10 @@ namespace Classlibrary {
             }
         }
 
+        // Moves a task from one list to the next one in
+        // If the original list is the Done-list, it moves it back to Doing
+        // Otherwise it moves it up one step
+        // Ex Todo -> Doing -> Done -> Doing 
         public void MoveTask(int taskIndex, ListType source) {
             int newListIndex = (source == ListType.Done) ? (int)source - 1 : (int)source + 1;
             Task taskToMove = GetTask(source, taskIndex);

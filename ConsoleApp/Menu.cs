@@ -1,16 +1,26 @@
 using System;
+using System.Collections.Generic;
 
 namespace ConsoleApp
 {
     class Menu
     {
-        enum menuItems
+        enum mainMenuItems
         {
-            toDo = 0,
-            doing = 1,
-            done = 2
+            CreateTask,
+            SearchTasks,
+            SortByList,
+            SortByAttribute,
+            Notes,
+            Quit
         }
-        public int DisplayMenu(string[] menuOptions, string header)
+        enum sortMenuItems
+        {
+            Todo,
+            Doing,
+            Done
+        }
+        public int DisplayMenu(List<string> menuThings, string header)
         {
             int currentIndex = 0;
             ConsoleKey keyPress;
@@ -20,10 +30,10 @@ namespace ConsoleApp
             {
                 Console.Clear();
                 Console.WriteLine(header);
-                foreach (string s in menuOptions)
+                foreach (string s in menuThings)
                 {
                     string finalOption = "";
-                    if (Array.IndexOf(menuOptions, s) == currentIndex)
+                    if (menuThings.IndexOf(s) == currentIndex)
                     {
                         Console.ForegroundColor = ConsoleColor.Blue;
                         finalOption += selectionArrow;
@@ -41,36 +51,71 @@ namespace ConsoleApp
 
                 if (keyPress == ConsoleKey.UpArrow)
                 {
-                    currentIndex = (currentIndex == 0) ? menuOptions.Length - 1 : currentIndex - 1;
+                    currentIndex = (currentIndex == 0) ? menuThings.Count - 1 : currentIndex - 1;
                 }
                 else if (keyPress == ConsoleKey.DownArrow)
                 {
-                    currentIndex = (currentIndex == menuOptions.Length - 1) ? 0 : currentIndex + 1;
+                    currentIndex = (currentIndex == menuThings.Count - 1) ? 0 : currentIndex + 1;
                 }
                 else if (keyPress == ConsoleKey.Enter)
                 {
-                    MenuOptions(currentIndex);
                     return currentIndex;
                 }
             }
         }
 
-        private void MenuOptions(int returnIndex)
+        public void MainMenuOptions()
         {
+            List<string> mainMenuOptions = AddEnumItems.CreateUpperCase(typeof(mainMenuItems));
+            int returnIndex = DisplayMenu(mainMenuOptions, "Main Menu");
             switch (returnIndex)
             {
-                case (int)menuItems.toDo:
+                case (int)mainMenuItems.CreateTask:
+                    System.Console.WriteLine("Create Task");
+                    break;
+
+                case (int)mainMenuItems.SearchTasks:
+                    System.Console.WriteLine("Search Task");
+                    break;
+
+                case (int)mainMenuItems.SortByList:
+                    SortByList();
+                    break;
+
+                case (int)mainMenuItems.SortByAttribute:
+                    System.Console.WriteLine("Sort by attribute");
+                    break;
+
+                case (int)mainMenuItems.Notes:
+                    System.Console.WriteLine("Notes");
+                    break;
+
+                case (int)mainMenuItems.Quit:
+                    System.Console.WriteLine("Quit");
+                    return;
+
+                default:
+                    break;
+            }
+        }
+
+        private void SortByList()
+        {
+            List<string> sortOptionsMenu = AddEnumItems.CreateUpperCase(typeof(sortMenuItems));
+            int returnIndex = DisplayMenu(sortOptionsMenu, "Sort Menu");
+            switch (returnIndex)
+            {
+                case (int)sortMenuItems.Todo:
                     System.Console.WriteLine("TODO");
                     break;
 
-                case (int)menuItems.doing:
+                case (int)sortMenuItems.Doing:
                     System.Console.WriteLine("DOING");
                     break;
 
-                case (int)menuItems.done:
+                case (int)sortMenuItems.Done:
                     System.Console.WriteLine("DONE");
                     break;
-
                 default:
                     break;
             }

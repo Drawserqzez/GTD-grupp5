@@ -8,7 +8,10 @@ namespace Classlibrary {
         private List<List<Task>> _taskList;
 
         public TodoHandler() {
-            _taskList = new List<List<Task>>();      
+            _taskList = new List<List<Task>>();
+            _taskList.Add(new List<Task>());      
+            _taskList.Add(new List<Task>());      
+            _taskList.Add(new List<Task>());      
         }
 
         // AddItem adds a task to the todo-list. Can later be changed with MoveTask

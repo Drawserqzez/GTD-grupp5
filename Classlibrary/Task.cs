@@ -35,6 +35,14 @@ namespace Classlibrary
             _description = description;
         }
 
+        public Task(string title, DateTime deadline, TaskType type, Priority prio, string description) {
+            _title = title;
+            _dateAdded = DateTime.Now;
+            _deadline = deadline;
+            _type = type;
+            _priority = prio;
+            _description = description;
+        }
         public override string ToString() {
             string s = _title +
                 "\nDate added: " + _dateAdded.ToString() +

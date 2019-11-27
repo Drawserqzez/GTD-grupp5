@@ -1,10 +1,61 @@
 ﻿@page
 @model IndexModel
+
 @{
-    ViewData["Title"] = "Home page";
+
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Your tasks</h1>
 </div>
+<div>
+    <select>
+        <option>All tasks</option>
+        <option>ToDo</option>
+        <option>Doing</option>
+        <option>Done</option>
+    </select>
+</div>
+
+<div class="text-center">
+    <h5>ToDo (@Model.TestToDo.Count)</h5>
+        <table class="table ToDo">
+            @foreach (var text in Model.TestToDo)
+            {
+                <tr>
+                    <td><input type="checkbox" name="checkToDo">@text</td>
+                </tr>
+            }
+        </table>
+        <button id="btnToDo" class="button">Move</button>
+</div>
+
+<form id="form1" runat="server">
+<div class="text-center">
+    <h5>Doing (@Model.TestDoing.Count)</h5>
+        <table class="table Doing">
+            @foreach (var text in Model.TestDoing)
+            {
+                <tr>
+                    <td><input type="radio" name="checkDoing" value=""/>@text</td>
+                </tr>
+            }
+        </table> 
+</div>
+    <div class="text-center">
+        <button class="button" type="submit" onclick="doingMove()">Move</button>
+    </div>
+</form>
+
+<div class="text-center">
+    <h5>Done (@Model.TestDone.Count)</h5>
+        <table class="table Done">
+            @foreach (var text in Model.TestDone)
+            {
+                <tr>
+                    <td>@text</td>
+                </tr>
+            }
+        </table>
+</div>
+

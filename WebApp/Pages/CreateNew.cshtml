@@ -1,0 +1,60 @@
+@page
+@model CreateNewModel
+@{
+  
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<form method="get">
+<div>
+        <input type="text" name="title" value=""/>
+    </div>
+<div class="input-group date" data-provide="datepicker">
+    <input type="date" name="deadLine">
+    <div class="input-group-addon">
+        <span class="glyphicon glyphicon-th"></span>
+    </div>
+</div>
+<div>
+        <input type="text" name="description" value=""/>
+    </div>
+
+
+<div>
+    <select value="" name="TaskType">
+        <option selected disabled>Choose type here</option>
+        <option value="0">Work</option>
+        <option value="1">Home</option>
+        <option value="2">Children</option>
+        <option value="3">Freetime</option>
+    </select>
+
+</div>
+
+<div>
+    <select value="" name="priority">
+        <option selected disabled>Choose priority here</option>
+        <option value="0">Whenever</option>
+        <option value="1">Low</option>
+        <option value="2">Medium</option>
+        <option value="3">High</option>
+        <option value="4">Immediatly</option>
+    </select>
+
+</div>
+
+<span class="input-group-btn">
+                <button class="btn" onclick="OnGet()">Add</button>
+            </span>
+
+</form>
+
+
+
+
+
+
+

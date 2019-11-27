@@ -13,10 +13,16 @@
         <div class ="input-group">
             <input type="search" class="form-control" value="" placeholder="Search here" name="searchTerm"/>
             <span class="input-group-btn">
-                <button class="btn btn-default" onclick="OnGet()">Search</button>
+                <input class="btn" type="submit" value="Search" />
             </span>
         </div>
     </div>
 </form>
 
-
+@if (Model.Results != null) 
+{
+    foreach(var v in Model.Results) 
+    {
+        <p>@v.Title</p>
+    }
+}

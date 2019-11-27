@@ -14,11 +14,18 @@ namespace WebApp.Pages
     {
         
 
-
+       public List<string> TestToDo = new List<string>();
+       public List<string> TestDoing = new List<string>();
+       public List<string> TestDone = new List<string>();
 
         public void OnGet()
         {
-            
+            TestToDo.Add("Majs1");
+            TestToDo.Add("Majs2");
+            TestDoing.Add("Majs3");
+            TestDoing.Add("Majs4");
+            TestDone.Add("Majs5");
+            TestDone.Add("Majs6");
         }
         
 

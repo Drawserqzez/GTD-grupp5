@@ -64,6 +64,11 @@ namespace Classlibrary {
             }
         }
 
+        // Gets all tasks from a specified list
+        public List<Task> GetTasks(ListType source) {
+            return _taskList[(int)source];
+        }
+
         // Moves a task from one list to the next one in
         // If the original list is the Done-list, it moves it back to Doing
         // Otherwise it moves it up one step

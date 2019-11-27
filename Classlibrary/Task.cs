@@ -43,6 +43,7 @@ namespace Classlibrary
             _priority = prio;
             _description = description;
         }
+        
         public override string ToString() {
             string s = _title +
                 "\nDate added: " + _dateAdded.ToString() +

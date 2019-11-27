@@ -37,8 +37,8 @@ namespace Classlibrary
 
         public override string ToString() {
             string s = _title +
-                "\nDate added: " + _dateAdded.ToOADate().ToString() +
-                "\nDeadline: " + _deadline.ToOADate().ToString() +
+                "\nDate added: " + _dateAdded.ToString() +
+                "\nDeadline: " + _deadline.ToString() +
                 "\nType: " + _type.ToString() + 
                 "\nPriority: " + _priority.ToString() + 
                 "\nDescription: " +

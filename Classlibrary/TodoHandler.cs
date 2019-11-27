@@ -11,7 +11,11 @@ namespace Classlibrary {
             _taskList = new List<List<Task>>();
             _taskList.Add(new List<Task>());      
             _taskList.Add(new List<Task>());      
-            _taskList.Add(new List<Task>());      
+            _taskList.Add(new List<Task>());     
+
+            this.AddItem(new Task("Majs", 2, Task.TaskType.Home, Task.Priority.Immediately, "Mums för tacos"));
+            this.AddItem(new Task("Kaffe", 1, Task.TaskType.Work, Task.Priority.Medium, "Kaffe gott"));
+            this.AddItem(new Task("Lämna tillbaka barn på ikea", 25, Task.TaskType.Children, Task.Priority.Low, "barn kosta mycket"));
         }
 
         // AddItem adds a task to the todo-list. Can later be changed with MoveTask

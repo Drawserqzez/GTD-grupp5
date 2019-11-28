@@ -83,5 +83,22 @@ namespace Classlibrary {
             _taskList[(int)source].Remove(taskToMove);
             _taskList[newListIndex].Add(taskToMove);
         }
+
+        private bool IsTaskInList(Task task, ListType list) {
+            var check = _taskList[(int)list].FindAll(t => t == task);
+            return (check != null && check.Count > 0);
+        }
+
+        public ListType GetListType(int taskIndex) {
+            var taskList = GetTasks();
+            var task = taskList[taskIndex];
+            for (int i = 0; i > _taskList.Count; i++) {
+                if (IsTaskInList(task, (ListType)i)) {
+                    return (ListType)i;
+                }
+            }
+
+            return ListType.Done;            
+        }
     }
 }

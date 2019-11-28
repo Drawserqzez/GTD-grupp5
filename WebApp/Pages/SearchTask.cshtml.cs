@@ -10,14 +10,32 @@ namespace WebApp.Pages
 {
     
     public class SearchTaskModel : PageModel
-    {   
-        Classlibrary.TodoHandler ToDoSearch = new Classlibrary.TodoHandler();
-       
-        
-        public void OnGet(string searchTerm)
+    {     
+        public List<Classlibrary.Task> Results;
+
+        // public void OnGet() {
+
+        // }
+
+        public void OnGet(string searchTerm = "")
         {
-           ToDoSearch.SearchTasks(searchTerm);
-          
+            // Victor löste efter trubbel, kolla default parameter
+            
+            if (searchTerm == "") {
+                Results = new List<Classlibrary.Task>();
+            }
+            else {
+
+            Results = Startup.todoHandler.SearchTasks(searchTerm);
+            }
         }
+
+       // [HttpGet]
+      //  public void OnGet(string searchTerm) {
+
+         //  Results = Startup.todoHandler.SearchTasks(searchTerm);   
+       // }
+       // public void OnPost()
+        
     }
 }

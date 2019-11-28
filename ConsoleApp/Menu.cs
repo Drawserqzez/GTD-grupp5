@@ -86,15 +86,21 @@ namespace ConsoleApp
                         break;
 
                     case (int)mainMenuItems.SearchTasks:
-                        todoHandler.GetTasks();
+                        SearchTask();
+                        System.Console.WriteLine("Press any button to continue");
+                        Console.ReadKey();
                         break;
 
                     case (int)mainMenuItems.SortByList:
                         SortByList();
+                        System.Console.WriteLine("Press any button to continue");
+                        Console.ReadKey();
                         break;
 
                     case (int)mainMenuItems.SortByAttribute:
                         SortByAttribute();
+                        System.Console.WriteLine("Press any button to continue");
+                        Console.ReadKey();
                         break;
 
                     case (int)mainMenuItems.Notes:
@@ -118,15 +124,27 @@ namespace ConsoleApp
             switch (returnIndex)
             {
                 case (int)sortMenuItems.Todo:
-                    System.Console.WriteLine("TODO");
+                    foreach (Task task in todoHandler.GetTasks(TodoHandler.ListType.Todo))
+                    {
+                        System.Console.WriteLine(task.ToString() +
+                         "\n-----------------------------------------------\n");
+                    }
                     break;
 
                 case (int)sortMenuItems.Doing:
-                    System.Console.WriteLine("DOING");
+                    foreach (Task task in todoHandler.GetTasks(TodoHandler.ListType.Doing))
+                    {
+                        System.Console.WriteLine(task.ToString() +
+                         "\n-----------------------------------------------\n");
+                    }
                     break;
 
                 case (int)sortMenuItems.Done:
-                    System.Console.WriteLine("DONE");
+                    foreach (Task task in todoHandler.GetTasks(TodoHandler.ListType.Done))
+                    {
+                        System.Console.WriteLine(task.ToString() +
+                         "\n-----------------------------------------------\n");
+                    }
                     break;
 
                 default:
@@ -141,15 +159,41 @@ namespace ConsoleApp
             switch (returnIndex)
             {
                 case (int)AttributeMenuItems.Type:
-                    System.Console.WriteLine("Sort by type");
+                    foreach (Task task in todoHandler.GetTasks(false))
+                    {
+                        System.Console.WriteLine(task.ToString() +
+                         "\n-----------------------------------------------\n");
+                    }
                     break;
 
                 case (int)AttributeMenuItems.Prio:
-                    System.Console.WriteLine("Sort by prio");
+                    foreach (Task task in todoHandler.GetTasks(true))
+                    {
+                        System.Console.WriteLine(task.ToString() +
+                         "\n-----------------------------------------------\n");
+                    }
                     break;
 
                 default:
                     break;
+            }
+        }
+
+        private void SearchTask()
+        {
+            Console.Clear();
+
+            string userInput;
+            List<Task> searchedTasks = new List<Task>();
+            System.Console.WriteLine("Type in what task you are searching for");
+            userInput = Console.ReadLine();
+            searchedTasks = todoHandler.SearchTasks(userInput);
+            Console.Clear();
+
+            foreach (Task task in searchedTasks)
+            {
+                System.Console.WriteLine(task.ToString() +
+                 "\n-----------------------------------------------\n");
             }
         }
 
@@ -165,9 +209,8 @@ namespace ConsoleApp
             System.Console.WriteLine("Write a title for your task");
             title = Console.ReadLine();
 
-            //TODO: Kolla om man ska ta in en datetime istället här!
             Console.Clear();
-            System.Console.WriteLine("What's your deadline for the project?");
+            System.Console.WriteLine("How many days do you want to work on the task?");
             deadLine = Convert.ToInt32(Console.ReadLine());
 
             Console.Clear();

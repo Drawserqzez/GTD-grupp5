@@ -7,25 +7,22 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Classlibrary;
 
 
-
 namespace WebApp.Pages
 {
     public class IndexModel : PageModel
     {
-        
-
        public List<string> TestToDo = new List<string>();
        public List<string> TestDoing = new List<string>();
        public List<string> TestDone = new List<string>();
 
+       
+       public List<Classlibrary.Task> taskList;
+       public Classlibrary.Task task;
         public void OnGet()
         {
-            TestToDo.Add("Majs1");
-            TestToDo.Add("Majs2");
-            TestDoing.Add("Majs3");
-            TestDoing.Add("Majs4");
-            TestDone.Add("Majs5");
-            TestDone.Add("Majs6");
+           taskList = Startup.todoHandler.GetTasks();
+        //    task = taskList[0];
+        //    task. 
         }
         
 

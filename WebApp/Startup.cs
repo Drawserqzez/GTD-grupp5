@@ -14,6 +14,7 @@ namespace WebApp
 {
     public class Startup
     {
+        public static Classlibrary.TodoHandler todoHandler = new Classlibrary.TodoHandler();
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,13 +32,14 @@ namespace WebApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

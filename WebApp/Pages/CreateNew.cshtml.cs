@@ -10,12 +10,18 @@ namespace WebApp.Pages
 {
     public class CreateNewModel : PageModel
     {
-        Classlibrary.TodoHandler NewTask = new Classlibrary.TodoHandler();
-        
-        public void OnGet(string title, DateTime deadLine, Classlibrary.Task.TaskType TaskType, Classlibrary.Task.Priority priority, string description)
+               
+        public void OnGet()
         {   
-            Classlibrary.Task task = new Classlibrary.Task(title, deadLine, TaskType, priority, description);
-            NewTask.AddItem(task);
+//            if (title != null || description != null)
+
+//                Classlibrary.Task itemToAdd = new Classlibrary.Task(title, deadLine, TaskType, priority, description);
+  //              Startup.todoHandler.AddItem(itemToAdd);
+        }
+        public void OnPost(string title, DateTime deadLine, Classlibrary.Task.TaskType TaskType, Classlibrary.Task.Priority priority, string description)
+        {
+            Classlibrary.Task itemToAdd = new Classlibrary.Task(title, deadLine, TaskType, priority, description);
+                Startup.todoHandler.AddItem(itemToAdd);
         }
     }
 }

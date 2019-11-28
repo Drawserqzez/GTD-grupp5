@@ -17,45 +17,17 @@
     </select>
 </div>
 
+
 <div class="text-center">
-    <h5>ToDo (@Model.TestToDo.Count)</h5>
-        <table class="table ToDo">
-            @foreach (var text in Model.TestToDo)
+    <h5>Tasks (@Model.taskList.Count)</h5>
+        <table class="table Gettasks">
+            @foreach (var text in Model.taskList)
             {
                 <tr>
-                    <td><input type="checkbox" name="checkToDo">@text</td>
+                    <td><input type="radio" name="checkToDo">@text</td>
                 </tr>
             }
         </table>
         <button id="btnToDo" class="button">Move</button>
-</div>
-
-<form id="form1" runat="server">
-<div class="text-center">
-    <h5>Doing (@Model.TestDoing.Count)</h5>
-        <table class="table Doing">
-            @foreach (var text in Model.TestDoing)
-            {
-                <tr>
-                    <td><input type="radio" name="checkDoing" value=""/>@text</td>
-                </tr>
-            }
-        </table> 
-</div>
-    <div class="text-center">
-        <button class="button" type="submit" onclick="doingMove()">Move</button>
-    </div>
-</form>
-
-<div class="text-center">
-    <h5>Done (@Model.TestDone.Count)</h5>
-        <table class="table Done">
-            @foreach (var text in Model.TestDone)
-            {
-                <tr>
-                    <td>@text</td>
-                </tr>
-            }
-        </table>
 </div>
 

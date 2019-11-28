@@ -19,9 +19,10 @@ namespace WebApp.Pages
 
         public void OnGet(string searchTerm = "")
         {
-            // Victor löste efter trubbel, kolla default parameter
+            // Victor löste efter trubbel, kolla default parameter.
+            // Victors lösning gav error vid null-sökning. Ändrade om.
             
-            if (searchTerm == "") {
+            if (String.IsNullOrEmpty(searchTerm)) {
                 Results = new List<Classlibrary.Task>();
             }
             else {

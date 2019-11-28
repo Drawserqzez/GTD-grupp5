@@ -13,25 +13,48 @@ namespace WebApp.Pages
     {       
         public List<Classlibrary.Task> taskList;
         public Classlibrary.Task task;
-        public bool sortAt {get; set;}
-
-        public void OnGet(int SortNum)
+       // public List<Classlibrary.TodoHandler.ListType> takslisto;
+        public List<Classlibrary.Task> moveTask;
+        public void OnGet(int SortNum, int State)
         {
-            if (SortNum == 1)
-                {sortAt = true;}
-            else if (SortNum == 0)
-                {sortAt = false;}
-            taskList = Startup.todoHandler.GetTasks(sortAt);
+            bool sortByPriority;
+            
+            if (SortNum > 0)
+            {
+                if (SortNum == 1)
+                {
+                    sortByPriority = true;
+                    taskList = Startup.todoHandler.GetTasks(sortByPriority);
+                }
+                else if (SortNum == 2)
+                {
+                    sortByPriority = false;
+                    taskList = Startup.todoHandler.GetTasks(sortByPriority);
+                }
+            }
+            else
+            {
+                taskList = Startup.todoHandler.GetTasks();
+            }
+            if (State > -1)
+            {
+                if (State == 0)
+                {
+                    taskList = Startup.todoHandler.GetTasks((TodoHandler.ListType)State);
+                }
+                else if (State == 1)
+                {
+                    taskList = Startup.todoHandler.GetTasks((TodoHandler.ListType)State);
+                }
+                else if (State == 2)
+                {
+                    taskList = Startup.todoHandler.GetTasks((TodoHandler.ListType)State);
+                }
+            }
         }
-        
-
-        public void doingMove() 
+        public void OnPost(int State, int move) 
         {
-           // string majs = Classlibrary.TodoHandler._taskList;
-           // string majs = Classlibrary.Task.
-                 }
-
-       
+           Startup.todoHandler.MoveTask(move, (TodoHandler.ListType)State);
+        }
     }
-    
 }

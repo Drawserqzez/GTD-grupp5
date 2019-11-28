@@ -9,7 +9,7 @@
     <h1 class="display-4">Your tasks</h1>
 </div>
 <div>
-    <select>
+    <select value="" name="State">
         <option>All tasks</option>
         <option>ToDo</option>
         <option>Doing</option>
@@ -17,17 +17,56 @@
     </select>
 </div>
 
+<!--
+<div>
+    <select value="" name="Type">
+        <option>Choose type here</option>
+        <option value="0">Work</option>
+        <option value="1">Home</option>
+        <option value="2">Children</option>
+        <option value="3">Freetime</option>
+    </select>
+</div>
+-->
+<form method="post">
+<div>
+    <select value="" name="Sort">
+        <option>Choose how to sort here</option>
+        <option value="0">Priority</option>
+        <option value="1">Type</option>
+    </select>
+</div>
+
+<div>
+    <span class="input-group-btn">
+        <input type="submit" class="btn" Value="Sort tasks"/>
+    </span>
+</div>
+</form>
 
 <div class="text-center">
+    <div class></div>
     <h5>Tasks (@Model.taskList.Count)</h5>
-        <table class="table Gettasks">
-            @foreach (var text in Model.taskList)
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Dateadded</th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            @foreach (Classlibrary.Task text in Model.taskList)
             {
                 <tr>
-                    <td><input type="radio" name="checkToDo">@text</td>
+                    <td>@text.Title</td>
+                    <td>@text.Type</td>
+                    <td>@text.TaskPriority</td>
+                    <td></td>
                 </tr>
             }
         </table>
         <button id="btnToDo" class="button">Move</button>
 </div>
-

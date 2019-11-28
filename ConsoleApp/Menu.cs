@@ -9,7 +9,7 @@ namespace ConsoleApp
         enum mainMenuItems
         {
             CreateTask,
-            SearchTasks,
+            MoveTasks,
             SortByList,
             SortByAttribute,
             Notes,
@@ -21,10 +21,15 @@ namespace ConsoleApp
             Doing,
             Done
         }
-        enum AttributeMenuItems
+        enum attributeMenuItems
         {
             Type,
             Prio
+        }
+        enum searchTaskMenuItems
+        {
+            Yes,
+            No
         }
         private TodoHandler todoHandler = new TodoHandler();
 
@@ -85,8 +90,8 @@ namespace ConsoleApp
                         CreateNewTask();
                         break;
 
-                    case (int)mainMenuItems.SearchTasks:
-                        SearchTask();
+                    case (int)mainMenuItems.MoveTasks:
+                        MoveTask();
                         System.Console.WriteLine("Press any button to continue");
                         Console.ReadKey();
                         break;
@@ -154,11 +159,11 @@ namespace ConsoleApp
 
         private void SortByAttribute()
         {
-            List<string> sortAttributesMenu = AddEnumItems.CreateUpperCase(typeof(AttributeMenuItems));
+            List<string> sortAttributesMenu = AddEnumItems.CreateUpperCase(typeof(attributeMenuItems));
             int returnIndex = DisplayMenu(sortAttributesMenu, "Attributes Menu");
             switch (returnIndex)
             {
-                case (int)AttributeMenuItems.Type:
+                case (int)attributeMenuItems.Type:
                     foreach (Task task in todoHandler.GetTasks(false))
                     {
                         System.Console.WriteLine(task.ToString() +
@@ -166,7 +171,7 @@ namespace ConsoleApp
                     }
                     break;
 
-                case (int)AttributeMenuItems.Prio:
+                case (int)attributeMenuItems.Prio:
                     foreach (Task task in todoHandler.GetTasks(true))
                     {
                         System.Console.WriteLine(task.ToString() +
@@ -179,22 +184,46 @@ namespace ConsoleApp
             }
         }
 
-        private void SearchTask()
+        private void MoveTask()
         {
             Console.Clear();
+            System.Console.WriteLine("Do you want to move a task?");
+            List<string> searchTaskMenu = AddEnumItems.CreateUpperCase(typeof(searchTaskMenuItems));
 
+            int returnIndex = DisplayMenu(searchTaskMenu, "Items");
+
+            switch (returnIndex)
+            {
+                case (int)searchTaskMenuItems.Yes:
+                    SearchTask();
+                    break;
+                case (int)searchTaskMenuItems.No:
+                    return;
+                default:
+                    break;
+            }
+
+        }
+
+        private void SearchTask()
+        {
             string userInput;
+            int moveInt;
             List<Task> searchedTasks = new List<Task>();
+            List<string> taskInfo = new List<string>();
             System.Console.WriteLine("Type in what task you are searching for");
             userInput = Console.ReadLine();
-            searchedTasks = todoHandler.SearchTasks(userInput);
-            Console.Clear();
+            searchedTasks = todoHandler.GetTasks();
 
             foreach (Task task in searchedTasks)
             {
-                System.Console.WriteLine(task.ToString() +
-                 "\n-----------------------------------------------\n");
+                taskInfo.Add(task.Title);
             }
+
+            moveInt = DisplayMenu(taskInfo, "Items");
+            // List<string> sortOptionsMenu = AddEnumItems.CreateUpperCase(typeof(TodoHandler.ListType));
+            // int returnIndex = DisplayMenu(sortOptionsMenu, "Types");
+            todoHandler.MoveTask(moveInt, todoHandler.GetListType(moveInt));
         }
 
         private void CreateNewTask()

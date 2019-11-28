@@ -15,8 +15,11 @@ namespace Classlibrary
         private string _description;
 
         public string Title { get { return _title; }}
+        public DateTime DateAdded { get { return _dateAdded; }}
+        public DateTime Deadline { get { return _deadline; }}
         public Priority TaskPriority { get { return _priority; }}
         public TaskType Type { get { return _type; }}
+        public string Description { get; set; }
 
         public Task() {
 

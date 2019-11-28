@@ -8,26 +8,67 @@
 <div class="text-center">
     <h1 class="display-4">Your tasks</h1>
 </div>
+
+
+
+<form method="get">
+
 <div>
-    <select>
-        <option>All tasks</option>
-        <option>ToDo</option>
-        <option>Doing</option>
-        <option>Done</option>
+    <select value="" name="State">
+        <option value="-1">All tasks</option>
+        <option value="0">ToDo</option>
+        <option value="1">Doing</option>
+        <option value="2">Done</option>
     </select>
 </div>
 
+<div>
+    <select value="" name="SortNum">
+        <option>Choose how to sort here</option>
+        <option value="1">Priority</option>
+        <option value="2">Type</option>
+    </select>
+</div>
 
+<div>
+    <span class="input-group-btn">
+        <input type="submit" class="btn" Value="Sort tasks"/>
+    </span>
+</div>
+</form>
+
+
+<form method="post">
 <div class="text-center">
+    <div class></div>
     <h5>Tasks (@Model.taskList.Count)</h5>
-        <table class="table Gettasks">
-            @foreach (var text in Model.taskList)
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Dateadded</th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            @foreach (Classlibrary.Task text in Model.taskList)
             {
                 <tr>
-                    <td><input type="radio" name="checkToDo">@text</td>
+                    <td><input type="checkbox" name="move" value="@Model.taskList.IndexOf(text)" />@text.Title</td>
+                    <td>@text.DateAdded</td>
+                    <td>@text.Deadline</td>
+                    <td>@text.Type</td>
+                    <td>@text.TaskPriority</td>
+                    <td>@text.Description</td>
                 </tr>
             }
         </table>
-        <button id="btnToDo" class="button">Move</button>
+    <div>
+    <span class="input-group-btn">
+        <input type="submit" class="btn" Value="Move"/>
+    </span>
+    </div>  
 </div>
-
+</form>

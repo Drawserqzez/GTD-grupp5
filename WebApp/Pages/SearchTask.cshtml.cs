@@ -13,9 +13,6 @@ namespace WebApp.Pages
     {     
         public List<Classlibrary.Task> Results;
 
-        // public void OnGet() {
-
-        // }
 
         public void OnGet(string searchTerm = "")
         {
@@ -28,15 +25,12 @@ namespace WebApp.Pages
             else {
 
             Results = Startup.todoHandler.SearchTasks(searchTerm);
+
             }
         }
-
-       // [HttpGet]
-      //  public void OnGet(string searchTerm) {
-
-         //  Results = Startup.todoHandler.SearchTasks(searchTerm);   
-       // }
-       // public void OnPost()
-        
+        public void Onpost()
+        {
+            
+        }
     }
 }

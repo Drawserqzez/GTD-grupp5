@@ -5,6 +5,18 @@
 
 }
 
+<style>
+tr.selected {
+  background: #ddd;
+}
+
+th, td {
+  text-align: left;
+}
+
+tr:hover {background-color:#dcdcdc;}
+</style>
+
 <div class="text-center">
     <h1 class="display-4">Your tasks</h1>
 </div>
@@ -55,7 +67,7 @@
             </thead>
             @foreach (Classlibrary.Task text in Model.taskList)
             {
-                <tr>
+               <tr>
                     <td><input type="radio" name="move" checked value="@Model.taskList.IndexOf(text)" />@text.Title</td>
                     <td>@text.DateAdded</td>
                     <td>@text.Deadline</td>

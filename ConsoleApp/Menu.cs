@@ -229,7 +229,7 @@ namespace ConsoleApp
         private void CreateNewTask()
         {
             string title;
-            int deadLine;
+            int deadLine = 0;
             string description;
             Task.TaskType taskType;
             Task.Priority priorityType;
@@ -239,8 +239,23 @@ namespace ConsoleApp
             title = Console.ReadLine();
 
             Console.Clear();
-            System.Console.WriteLine("How many days do you want to work on the task?");
-            deadLine = Convert.ToInt32(Console.ReadLine());
+            bool tryAddDate = true;
+            while (tryAddDate)
+            {
+                try
+                {
+                    System.Console.WriteLine("How many days do you want to work on the task?");
+                    deadLine = Convert.ToInt32(Console.ReadLine());
+                    tryAddDate = false;
+                }
+                
+                catch (Exception ex)
+                {
+                    Console.Clear();
+                    Console.WriteLine(ex.Message + "\nPlease write the number of days in numbers!\n");
+                    tryAddDate = true;
+                }
+            }
 
             Console.Clear();
             System.Console.WriteLine("Write a short description for you task");

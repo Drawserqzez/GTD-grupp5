@@ -13,29 +13,24 @@ namespace WebApp.Pages
     {     
         public List<Classlibrary.Task> Results;
 
-        // public void OnGet() {
-
-        // }
 
         public void OnGet(string searchTerm = "")
         {
-            // Victor löste efter trubbel, kolla default parameter
+            // Victor löste efter trubbel, kolla default parameter.
+            // Victors lösning gav error vid null-sökning. Ändrade om.
             
-            if (searchTerm == "") {
+            if (String.IsNullOrEmpty(searchTerm)) {
                 Results = new List<Classlibrary.Task>();
             }
             else {
 
             Results = Startup.todoHandler.SearchTasks(searchTerm);
+
             }
         }
-
-       // [HttpGet]
-      //  public void OnGet(string searchTerm) {
-
-         //  Results = Startup.todoHandler.SearchTasks(searchTerm);   
-       // }
-       // public void OnPost()
-        
+        public void Onpost()
+        {
+            
+        }
     }
 }

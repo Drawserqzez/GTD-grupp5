@@ -10,22 +10,21 @@
 
 <form method="post">
 <div>
-        <input type="text" name="title" placeholder="Set a title here" value=""/>
+        <input type="text" name="title" placeholder="Set a title here" value="" required/>
     </div>
 <div>
-        <input type="text" name="description" placeholder="Write a descritption here" value=""/>
+        <input type="text" name="description" placeholder="Write a descritption here" value="" required/>
     </div>
+
 <div class="input-group date" data-provide="datepicker">
-    <input type="date" name="deadLine">
+    <input type="date" name="deadLine" required>
     <div class="input-group-addon">
         <span class="glyphicon glyphicon-th"></span>
     </div>
 </div>
 
-
-
 <div>
-    <select value="" name="TaskType">
+    <select name="TaskType" required>
         <option selected disabled>Choose type here</option>
         <option value="0">Work</option>
         <option value="1">Home</option>
@@ -35,7 +34,7 @@
 </div>
 
 <div>
-    <select value="" name="priority">
+    <select name="priority" required>
         <option selected disabled>Choose priority here</option>
         <option value="0">Whenever</option>
         <option value="1">Low</option>

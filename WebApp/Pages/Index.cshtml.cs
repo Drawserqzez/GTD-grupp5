@@ -12,13 +12,10 @@ namespace WebApp.Pages
     public class IndexModel : PageModel
     {       
         public List<Classlibrary.Task> taskList;
-        public Classlibrary.Task task;
-       // public List<Classlibrary.TodoHandler.ListType> takslisto;
-        public List<Classlibrary.Task> moveTask;
         public void OnGet(int SortNum, int State)
         {
             bool sortByPriority;
-            
+            taskList = Startup.todoHandler.GetTasks();
             if (SortNum > 0)
             {
                 if (SortNum == 1)
@@ -55,6 +52,8 @@ namespace WebApp.Pages
         public void OnPost(int State, int move) 
         {
            Startup.todoHandler.MoveTask(move, (TodoHandler.ListType)State);
+           int SortNum = 0;
+           OnGet(SortNum, State);
         }
     }
 }

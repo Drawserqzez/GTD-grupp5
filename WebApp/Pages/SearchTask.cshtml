@@ -4,11 +4,20 @@
     
 }
 
+<style>
+td {
+  text-align: left;
+}
+
+tr:hover {background-color:#dcdcdc;}
+
+</style>
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Search for a task</h1>
 </div>
 
-<form method="get">
+<form>
     <div class="form-group">
         <div class ="input-group">
             <input type="search" class="form-control" value="" placeholder="Search here" name="searchTerm"/>
@@ -19,10 +28,25 @@
     </div>
 </form>
 
+<div>
 @if (Model.Results != null) 
 {
-    foreach(var v in Model.Results) 
+    <table class="table">
+    <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Tasklist</th>
+            </tr>
+    </thead>
+    @foreach(Classlibrary.Task v in Model.Results) 
     {
-        <p>@v.Title</p>
+        <tr>
+            <td>@v.Title</td>
+            <td>@v.Description</td>
+            <td>@Startup.todoHandler.GetListType(Model.Results.IndexOf(v))</td>
+        </tr>
     }
+    </table>
 }
+</div>

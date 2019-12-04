@@ -117,6 +117,7 @@ namespace ConsoleApp
 
                     case (int)mainMenuItems.Quit:
                         System.Console.WriteLine("Quit");
+                        isOn = false;
                         return;
 
                     default:
@@ -259,7 +260,6 @@ namespace ConsoleApp
         {
             string title;
             int deadLine = 0;
-            string description;
             Task.TaskType taskType;
             Task.Priority priorityType;
 
@@ -284,11 +284,6 @@ namespace ConsoleApp
                     Console.WriteLine(ex.Message + "\nPlease write the number of days in numbers!\n");
                 }
             }
-
-            Console.Clear();
-            System.Console.WriteLine("Write a short description for you task");
-            description = Console.ReadLine();
-
 
             List<string> TaskTypeMenu = AddEnumItems.CreateUpperCase(typeof(Task.TaskType));
             int returnIndex = DisplayMenu(TaskTypeMenu, "Choose what type of task it is");
@@ -352,7 +347,7 @@ namespace ConsoleApp
                     priorityType = Task.Priority.Whenever;
                     break;
             }
-            Task task = new Task(title, deadLine, taskType, priorityType, description);
+            Task task = new Task(title, deadLine, taskType, priorityType);
             todoHandler.AddItem(task);
         }
     }

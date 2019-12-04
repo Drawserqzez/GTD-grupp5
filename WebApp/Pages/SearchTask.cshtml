@@ -35,7 +35,6 @@ tr:hover {background-color:#dcdcdc;}
     <thead>
             <tr>
                 <th scope="col">Title</th>
-                <th scope="col">Description</th>
                 <th scope="col">Tasklist</th>
             </tr>
     </thead>
@@ -43,7 +42,6 @@ tr:hover {background-color:#dcdcdc;}
     {
         <tr>
             <td>@v.Title</td>
-            <td>@v.Description</td>
             <td>@Startup.todoHandler.GetListType(Model.Results.IndexOf(v))</td>
         </tr>
     }

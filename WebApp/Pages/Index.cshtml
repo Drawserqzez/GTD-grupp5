@@ -62,7 +62,6 @@ tr:hover {background-color:#dcdcdc;}
                     <th scope="col">Deadline</th>
                     <th scope="col">Type</th>
                     <th scope="col">Priority</th>
-                    <th scope="col">Description</th>
                 </tr>
             </thead>
             @foreach (Classlibrary.Task text in Model.taskList)
@@ -73,7 +72,6 @@ tr:hover {background-color:#dcdcdc;}
                     <td>@text.Deadline</td>
                     <td>@text.Type</td>
                     <td>@text.TaskPriority</td>
-                    <td>@text.Description</td>
                 </tr>
             }
         </table>

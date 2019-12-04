@@ -12,6 +12,7 @@ namespace ConsoleApp
             MoveTasks,
             SortByList,
             SortByAttribute,
+            Search,
             Notes,
             Quit
         }
@@ -92,8 +93,6 @@ namespace ConsoleApp
 
                     case (int)mainMenuItems.MoveTasks:
                         MoveTask();
-                        System.Console.WriteLine("Press any button to continue");
-                        Console.ReadKey();
                         break;
 
                     case (int)mainMenuItems.SortByList:
@@ -106,6 +105,10 @@ namespace ConsoleApp
                         SortByAttribute();
                         System.Console.WriteLine("Press any button to continue");
                         Console.ReadKey();
+                        break;
+
+                    case (int)mainMenuItems.Search:
+                        SearchTask();
                         break;
 
                     case (int)mainMenuItems.Notes:
@@ -187,43 +190,69 @@ namespace ConsoleApp
         private void MoveTask()
         {
             Console.Clear();
-            System.Console.WriteLine("Do you want to move a task?");
-            List<string> searchTaskMenu = AddEnumItems.CreateUpperCase(typeof(searchTaskMenuItems));
+            int moveInt;
+            List<string> taskInfo = new List<string>();
+            List<string> sortOptionsMenu = AddEnumItems.CreateUpperCase(typeof(sortMenuItems));
 
-            int returnIndex = DisplayMenu(searchTaskMenu, "Items");
-
+            int returnIndex = DisplayMenu(sortOptionsMenu, "Type Menu");
             switch (returnIndex)
             {
-                case (int)searchTaskMenuItems.Yes:
-                    SearchTask();
+                case (int)sortMenuItems.Todo:
+                    foreach (Task task in todoHandler.GetTasks(TodoHandler.ListType.Todo))
+                    {
+                        taskInfo.Add(task.Title);
+                    }
                     break;
-                case (int)searchTaskMenuItems.No:
-                    return;
+
+                case (int)sortMenuItems.Doing:
+                    foreach (Task task in todoHandler.GetTasks(TodoHandler.ListType.Doing))
+                    {
+                        taskInfo.Add(task.Title);
+                    }
+                    break;
+
+                case (int)sortMenuItems.Done:
+                    foreach (Task task in todoHandler.GetTasks(TodoHandler.ListType.Done))
+                    {
+                        taskInfo.Add(task.Title);
+                    }
+                    break;
+
                 default:
                     break;
             }
+
+            moveInt = DisplayMenu(taskInfo, "Tasks");
+
+            var choice = taskInfo[moveInt];
+
+
+            var taskIndex = todoHandler.GetTasks().FindIndex(p => p.Title == choice);
+
+            todoHandler.MoveTask(taskIndex, todoHandler.GetListType(taskIndex));
 
         }
 
         private void SearchTask()
         {
-            string userInput;
-            int moveInt;
-            List<Task> searchedTasks = new List<Task>();
-            List<string> taskInfo = new List<string>();
-            System.Console.WriteLine("Type in what task you are searching for");
-            userInput = Console.ReadLine();
-            searchedTasks = todoHandler.GetTasks();
+            string userSearch;
+            List<Task> allTasks = new List<Task>();
 
-            foreach (Task task in searchedTasks)
+            System.Console.WriteLine("Type in what task you are searching for");
+            userSearch = Console.ReadLine();
+
+            userSearch = Console.ReadLine();
+            allTasks = todoHandler.SearchTasks(userSearch);
+
+            foreach (Task task in allTasks)
             {
-                taskInfo.Add(task.Title);
+                task.ToString();
             }
 
-            moveInt = DisplayMenu(taskInfo, "Items");
+
+
             // List<string> sortOptionsMenu = AddEnumItems.CreateUpperCase(typeof(TodoHandler.ListType));
             // int returnIndex = DisplayMenu(sortOptionsMenu, "Types");
-            todoHandler.MoveTask(moveInt, todoHandler.GetListType(moveInt));
         }
 
         private void CreateNewTask()
@@ -248,12 +277,11 @@ namespace ConsoleApp
                     deadLine = Convert.ToInt32(Console.ReadLine());
                     tryAddDate = false;
                 }
-                
+
                 catch (Exception ex)
                 {
                     Console.Clear();
                     Console.WriteLine(ex.Message + "\nPlease write the number of days in numbers!\n");
-                    tryAddDate = true;
                 }
             }
 

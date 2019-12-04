@@ -13,9 +13,9 @@ namespace Classlibrary {
             _taskList.Add(new List<Task>());      
             _taskList.Add(new List<Task>());     
 
-            this.AddItem(new Task("Majs", 2, Task.TaskType.Home, Task.Priority.Immediately, "Mums för tacos"));
-            this.AddItem(new Task("Kaffe", 1, Task.TaskType.Work, Task.Priority.Medium, "Kaffe gott"));
-            this.AddItem(new Task("Lämna tillbaka barn på ikea", 25, Task.TaskType.Children, Task.Priority.Low, "barn kosta mycket"));
+            this.AddItem(new Task("Förbered tacokväll", DateTime.Now.AddDays(5), Task.TaskType.Home, Task.Priority.Immediately, ""));
+            this.AddItem(new Task("Köp kaffe", 1, Task.TaskType.Work, Task.Priority.Medium, ""));
+            this.AddItem(new Task("Hämta barnen på dagis", 25, Task.TaskType.Children, Task.Priority.Low, ""));
         }
 
         // AddItem adds a task to the todo-list. Can later be changed with MoveTask
@@ -36,9 +36,9 @@ namespace Classlibrary {
 
         // Gets a task at a specific index from a specific list
         // With problems it returns an error
-        private Task GetTask(ListType source, int taskIndex) {
+        private Task GetTask(int taskIndex) {
             try {
-                return _taskList[(int)source][taskIndex];
+                return GetTasks()[taskIndex];
             }
             catch {
                 return new Task("Error");
@@ -78,10 +78,10 @@ namespace Classlibrary {
         // Otherwise it moves it up one step
         // Ex Todo -> Doing -> Done -> Doing 
         public void MoveTask(int taskIndex, ListType source) {
-            int newListIndex = (source == ListType.Done) ? (int)source - 1 : (int)source + 1;
-            Task taskToMove = GetTask(source, taskIndex);
+            ListType newListType = (source == ListType.Done) ? (ListType)((int)source - 1) : (ListType)((int)source + 1);
+            Task taskToMove = GetTask(taskIndex);
             _taskList[(int)source].Remove(taskToMove);
-            _taskList[newListIndex].Add(taskToMove);
+            _taskList[(int)newListType].Add(taskToMove);
         }
 
         private bool IsTaskInList(Task task, ListType list) {

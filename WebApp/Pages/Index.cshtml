@@ -62,6 +62,7 @@ tr:hover {background-color:#dcdcdc;}
                     <th scope="col">Deadline</th>
                     <th scope="col">Type</th>
                     <th scope="col">Priority</th>
+                    <th scope="col">Tasklist</th>
                 </tr>
             </thead>
             @foreach (Classlibrary.Task text in Model.taskList)
@@ -72,6 +73,7 @@ tr:hover {background-color:#dcdcdc;}
                     <td>@text.Deadline</td>
                     <td>@text.Type</td>
                     <td>@text.TaskPriority</td>
+                    <td>@Startup.todoHandler.GetListType(Model.taskList.IndexOf(text))</td>
                 </tr>
             }
         </table>

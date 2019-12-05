@@ -51,7 +51,7 @@ namespace WebApp.Pages
         }
         public void OnPost(int State, int move) 
         {
-           Startup.todoHandler.MoveTask(move, (TodoHandler.ListType)State);
+           Startup.todoHandler.MoveTask(move, (TodoHandler.ListType)Startup.todoHandler.GetListType(move));
            int SortNum = 0;
            OnGet(SortNum, State);
         }

@@ -19,7 +19,9 @@ namespace WebApp.Pages
                             Classlibrary.Task.Priority priority)
         {
             Classlibrary.Task itemToAdd = new Classlibrary.Task(title, deadLine, TaskType, priority);
-                Startup.todoHandler.AddItem(itemToAdd);
+            // creates task
+            Startup.todoHandler.AddItem(itemToAdd);
+            // adds task to ToDo-list.
         }
     }
 }

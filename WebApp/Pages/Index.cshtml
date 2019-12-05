@@ -68,7 +68,7 @@ tr:hover {background-color:#dcdcdc;}
             @foreach (Classlibrary.Task text in Model.taskList)
             {
                <tr>
-                    <td><input type="radio" name="move" checked value="@Model.taskList.IndexOf(text)" />@text.Title</td>
+                    <td><input type="radio" name="move" checked value="@text.Title" />@text.Title</td>
                     <td>@text.DateAdded</td>
                     <td>@text.Deadline</td>
                     <td>@text.Type</td>

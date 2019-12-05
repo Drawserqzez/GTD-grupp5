@@ -14,18 +14,21 @@ namespace WebApp.Pages
         public List<Classlibrary.Task> Results;
 
 
-        public void OnGet(string searchTerm = "")
+        public void OnGet(string searchTerm)
         {
-            // Victor löste efter trubbel, kolla default parameter.
-            // Victors lösning gav error vid null-sökning. Ändrade om.
             
-            if (String.IsNullOrEmpty(searchTerm)) {
+            
+            if (String.IsNullOrEmpty(searchTerm))
+            // If the value of searchTerm is null nothing gets printed out.
+            // Instead of having the default parameters Viktor added.
+            // Added because error when search was empty.
+            {
                 Results = new List<Classlibrary.Task>();
             }
-            else {
-
+            else 
+            // Sends search to the search method.
+            {
             Results = Startup.todoHandler.SearchTasks(searchTerm);
-
             }
         }
         public void Onpost()

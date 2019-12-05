@@ -9,6 +9,7 @@ namespace WebApp.Pages
 {
     public class NotepadModel : PageModel
     {
+        // Cut out during development. Gonna get added later on.
         public void OnGet()
         {
 

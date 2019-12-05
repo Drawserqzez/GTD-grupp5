@@ -17,6 +17,7 @@ namespace WebApp.Pages
             bool sortByPriority;
             taskList = Startup.todoHandler.GetTasks();
             if (SortNum > 0)
+            // Choice of sort, either priority or type.
             {
                 if (SortNum == 1)
                 {
@@ -34,6 +35,7 @@ namespace WebApp.Pages
                 taskList = Startup.todoHandler.GetTasks();
             }
             if (State > -1)
+            // Gets all tasks from a specified list
             {
                 if (State == 0)
                 {
@@ -49,11 +51,15 @@ namespace WebApp.Pages
                 }
             }
         }
-        public void OnPost(int State, int move) 
+        public void OnPost(int State, string move) 
         {
-           Startup.todoHandler.MoveTask(move, (TodoHandler.ListType)Startup.todoHandler.GetListType(move));
-           int SortNum = 0;
-           OnGet(SortNum, State);
+            // Checked radiobutton sends title with move. 
+            int moveTask = Startup.todoHandler.GetTasks().FindIndex(p => p.Title == move); 
+            // Use of gettasks to find the index of the checked task  and gives it to moveTask
+            Startup.todoHandler.MoveTask(moveTask, (TodoHandler.ListType)Startup.todoHandler.GetListType(moveTask));
+            // Send index of task to MoveTask.
+            int SortNum = 0;
+            OnGet(SortNum, State);
         }
     }
 }

@@ -13,7 +13,6 @@ namespace ConsoleApp
             SortByList,
             SortByAttribute,
             Search,
-            Notes,
             Quit
         }
         enum sortMenuItems
@@ -34,6 +33,7 @@ namespace ConsoleApp
         }
         private TodoHandler todoHandler = new TodoHandler();
 
+        //Algots menu
         public int DisplayMenu(List<string> menuThings, string header)
         {
             int currentIndex = 0;
@@ -83,6 +83,7 @@ namespace ConsoleApp
             bool isOn = true;
             while (isOn)
             {
+                //Creates a list of strings for the menu to dispay
                 List<string> mainMenuOptions = AddEnumItems.CreateUpperCase(typeof(mainMenuItems));
                 int returnIndex = DisplayMenu(mainMenuOptions, "Main Menu");
                 switch (returnIndex)
@@ -109,10 +110,8 @@ namespace ConsoleApp
 
                     case (int)mainMenuItems.Search:
                         SearchTask();
-                        break;
-
-                    case (int)mainMenuItems.Notes:
-                        System.Console.WriteLine("Notes");
+                        System.Console.WriteLine("Press any button to continue");
+                        Console.ReadKey();
                         break;
 
                     case (int)mainMenuItems.Quit:
@@ -126,6 +125,7 @@ namespace ConsoleApp
             }
         }
 
+        //Sorts tasks by TODO, DOING, DONE and displays in console
         private void SortByList()
         {
             List<string> sortOptionsMenu = AddEnumItems.CreateUpperCase(typeof(sortMenuItems));
@@ -161,6 +161,7 @@ namespace ConsoleApp
             }
         }
 
+        //Sorts the list by Type(Category) or by Prio(Low, Med, High)
         private void SortByAttribute()
         {
             List<string> sortAttributesMenu = AddEnumItems.CreateUpperCase(typeof(attributeMenuItems));
@@ -195,6 +196,7 @@ namespace ConsoleApp
             List<string> taskInfo = new List<string>();
             List<string> sortOptionsMenu = AddEnumItems.CreateUpperCase(typeof(sortMenuItems));
 
+            //Add tasks to specified list and displays them
             int returnIndex = DisplayMenu(sortOptionsMenu, "Type Menu");
             switch (returnIndex)
             {
@@ -227,7 +229,6 @@ namespace ConsoleApp
 
             var choice = taskInfo[moveInt];
 
-
             var taskIndex = todoHandler.GetTasks().FindIndex(p => p.Title == choice);
 
             todoHandler.MoveTask(taskIndex, todoHandler.GetListType(taskIndex));
@@ -241,19 +242,12 @@ namespace ConsoleApp
 
             System.Console.WriteLine("Type in what task you are searching for");
             userSearch = Console.ReadLine();
-
-            userSearch = Console.ReadLine();
             allTasks = todoHandler.SearchTasks(userSearch);
-
+            Console.Clear();
             foreach (Task task in allTasks)
             {
-                task.ToString();
+                System.Console.WriteLine(task.ToString() + "\n\n");
             }
-
-
-
-            // List<string> sortOptionsMenu = AddEnumItems.CreateUpperCase(typeof(TodoHandler.ListType));
-            // int returnIndex = DisplayMenu(sortOptionsMenu, "Types");
         }
 
         private void CreateNewTask()
